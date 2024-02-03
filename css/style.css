@@ -25,6 +25,10 @@ header,footer {
     padding-left: 100px;
 }
 
+.header-logo img {
+    height: 50px;
+}
+
 .header-site-menu {
     margin-right: 50px;
 }
@@ -43,6 +47,65 @@ a{
     margin-left: 20px;
     margin-right: 20px;
 }
+
+/*==================================================
+共通　横並びのための設定
+===================================*/
+
+.gnavi{
+    display: flex;
+    flex-wrap: wrap;/*スマホ表示折り返し用なのでPCのみなら不要*/
+    list-style: none;
+}
+
+.gnavi li a{
+    display: block;
+    padding:10px 25px;
+    text-decoration: none;
+    color: #333;
+}
+
+/*==================================================
+　5-3-5 左から右に背景が伸びる
+===================================*/
+
+/*背景の設定*/
+
+.gnavi li a{
+    /*背景色の基点とするためrelativeを指定*/
+  position: relative;
+}
+
+.gnavi li a::after {
+  content: '';
+    /*絶対配置で線の位置を決める*/
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  left: 0;
+    /*背景の形状*/
+  width: 0;
+  height:100%;
+  background:#666;
+    /*アニメーションの指定*/
+  transition:all 0.8s;
+  opacity: 0;/*はじめは透過0*/
+}
+
+/*現在地とhoverの設定*/
+.gnavi li.current a::after,
+.gnavi li a:hover::after {
+    /*背景の形状*/
+  width: 100%;/*横幅を伸ばす*/
+  opacity: 1;/*不透明に*/
+}
+
+.gnavi li.current a,
+.gnavi li a:hover{
+    color: #fff;
+}
+
+
 
 .container {
     display: flex;
@@ -86,6 +149,11 @@ a{
     text-align: center;
 }
 
+.container-cat-concept {
+    padding: 30px 0;
+    text-align: center;
+}
+
 .concept-button button {
     background-color: darkgray; /* ボタンの背景色 */
     color: white; /* ボタンの文字色 */
@@ -110,6 +178,7 @@ a{
 
 .recommendation-text h3 {
     text-align: center;
+    padding-bottom: 30px;
 }
 
 .item-list {
@@ -123,3 +192,89 @@ a{
     width: 100%;
     height: 200px;
 }
+
+/*==================================================
+スライダーのためのcss
+===================================*/
+.slider {/*横幅70%で左右に余白を持たせて中央寄せ*/
+    width:70%;
+     margin:0 auto;
+ }
+ 
+ .slider img {
+     width:100%;/*スライダー内の画像を横幅100%に*/
+     height:auto;
+ }
+ 
+ /*slickのJSで書かれるタグ内、スライド左右の余白調整*/
+ 
+ .slider .slick-slide {
+     margin:0 10px;
+ }
+ 
+ /*矢印の設定*/
+ 
+ /*戻る、次へ矢印の位置*/
+ .slick-prev, 
+ .slick-next {
+     position: absolute;/*絶対配置にする*/
+     top: 42%;
+     cursor: pointer;/*マウスカーソルを指マークに*/
+     outline: none;/*クリックをしたら出てくる枠線を消す*/
+     border-top: 2px solid #666;/*矢印の色*/
+     border-right: 2px solid #666;/*矢印の色*/
+     height: 15px;
+     width: 15px;
+ }
+ 
+ .slick-prev {/*戻る矢印の位置と形状*/
+     left: -1.5%;
+     transform: rotate(-135deg);
+ }
+ 
+ .slick-next {/*次へ矢印の位置と形状*/
+     right: -1.5%;
+     transform: rotate(45deg);
+ }
+ 
+ /*ドットナビゲーションの設定*/
+ 
+ .slick-dots {
+     text-align:center;
+     margin:20px 0 0 0;
+ }
+ 
+ .slick-dots li {
+     display:inline-block;
+     margin:0 5px;
+ }
+ 
+ .slick-dots button {
+     color: transparent;
+     outline: none;
+     width:8px;/*ドットボタンのサイズ*/
+     height:8px;/*ドットボタンのサイズ*/
+     display:block;
+     border-radius:50%;
+     background:#ccc;/*ドットボタンの色*/
+ }
+ 
+ .slick-dots .slick-active button{
+     background:#333;/*ドットボタンの現在地表示の色*/
+ }
+
+ .description-title {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+ }
+
+ .description-cats {
+    display: flex;
+    justify-content: center;
+ }
+
+ .cats-images img {
+    width: auto;
+    height: 300px;
+ }
